@@ -1,7 +1,14 @@
 {
   "navbar": {
     "title": "EcoTrack",
-    "subtitle": "Personal Commission Log & Social Platform"
+    "subtitle": "Personal Commission Log & Social Platform",
+    "dashboard": "Dashboard",
+    "emissions": "Emissions",
+    "community": "Community",
+    "profile": "Profile",
+    "settings": "Settings",
+    "moderator": "Moderator",
+    "admin": "Admin"
   },
   "landing": {
     "welcome": "Welcome to EcoTrack",
@@ -48,7 +55,35 @@
     "error": "Error"
   },
   "profile": {
-    "title": "Profile Settings",
+    "loading": "Loading profile...",
+    "notFound": "Profile Not Found",
+    "userNotFound": "User not found or profile is private.",
+    "backToDashboard": "Back to Dashboard",
+    "editProfile": "Edit Profile",
+    "follow": "Follow",
+    "comingSoon": "Coming Soon",
+    "followComingSoon": "Follow (Coming Soon)",
+    "noUsername": "No username",
+    "joined": "Joined",
+    "noBio": "No bio available.",
+    "addBio": "Add a bio to tell others about yourself!",
+    "stats": {
+      "ecoScore": "Eco Score",
+      "environmentalImpact": "Environmental Impact",
+      "posts": "Posts",
+      "sharedStories": "Shared Stories",
+      "connections": "Connections"
+    },
+    "posts": {
+      "yourPosts": "Your Posts",
+      "userPosts": "{name}'s Posts",
+      "comingSoonTitle": "Posts Coming Soon!",
+      "comingSoonDescription": "We're working on the posts feature where users can share their eco-friendly activities and inspire others in the community.",
+      "featureInDevelopment": "Feature in Development"
+    }
+  },
+  "settings": {
+    "title": "Account Settings",
     "subtitle": "Manage your account information and preferences",
     "profilePhoto": {
       "title": "Profile Photo",
@@ -84,8 +119,8 @@
     "actions": {
       "saveChanges": "Save Changes",
       "saving": "Saving...",
-      "updateSuccess": "Profile updated successfully!",
-      "updateError": "Error updating profile"
+      "updateSuccess": "Settings updated successfully!",
+      "updateError": "Error updating settings"
     },
     "accountActions": {
       "title": "Account Actions",
@@ -133,7 +168,7 @@
     "errors": {
       "uploadFailed": "Failed to upload image",
       "removeFailed": "Failed to remove image",
-      "updateFailed": "Failed to update profile"
+      "updateFailed": "Failed to update settings"
     }
   },
   "technical": {

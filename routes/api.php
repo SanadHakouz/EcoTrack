@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,9 +51,9 @@ Route::prefix('auth')->group(function () {
     Route::post('login', [AuthController::class, 'login']);
 
     // Password reset routes (public - no auth required)
-    Route::post('password/request-reset', [App\Http\Controllers\Api\UserController::class, 'requestPasswordReset']);
-    Route::post('password/verify-code', [App\Http\Controllers\Api\UserController::class, 'verifyResetCode']);
-    Route::post('password/reset', [App\Http\Controllers\Api\UserController::class, 'resetPassword']);
+    Route::post('password/request-reset', [UserController::class, 'requestPasswordReset']);
+    Route::post('password/verify-code', [UserController::class, 'verifyResetCode']);
+    Route::post('password/reset', [UserController::class, 'resetPassword']);
 });
 
 /*
@@ -78,10 +79,10 @@ Route::middleware('auth:sanctum')->group(function () {
     |--------------------------------------------------------------------------
     */
     Route::prefix('user')->group(function () {
-        Route::get('profile', [App\Http\Controllers\Api\UserController::class, 'profile']);
-        Route::put('profile', [App\Http\Controllers\Api\UserController::class, 'updateProfile']);
-        Route::post('profile/avatar', [App\Http\Controllers\Api\UserController::class, 'uploadAvatar']);
-        Route::delete('profile/avatar', [App\Http\Controllers\Api\UserController::class, 'deleteAvatar']);
+        Route::get('profile', [UserController::class, 'profile']);
+        Route::put('profile', [UserController::class, 'updateProfile']);
+        Route::post('profile/avatar', [UserController::class, 'uploadAvatar']);
+        Route::delete('profile/avatar', [UserController::class, 'deleteAvatar']);
         // Future: password reset, account deactivation
         // Route::put('password', [UserController::class, 'updatePassword']);
         // Route::delete('account', [UserController::class, 'deactivateAccount']);
@@ -162,6 +163,13 @@ Route::middleware('auth:sanctum')->group(function () {
         // Route::put('reports/{report}', [ReportController::class, 'update']);
         // Route::get('posts/reported', [PostController::class, 'getReportedPosts']);
     });
+
+    /*
+    |--------------------------------------------------------------------------
+    | Public User Profile Route
+    |--------------------------------------------------------------------------
+    */
+    Route::get('/users/{userId}/profile', [UserController::class, 'getPublicProfile']);
 });
 
 /*

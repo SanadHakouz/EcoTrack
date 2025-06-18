@@ -360,4 +360,45 @@ class UserController extends Controller
             ], 500);
         }
     }
+
+    /**
+     * Get public profile data for any user
+     */
+    public function getPublicProfile(Request $request, $userId)
+    {
+        try {
+            $user = User::findOrFail($userId);
+
+            // Return public profile data
+            $profileData = [
+                'id' => $user->id,
+                'name' => $user->name,
+                'username' => $user->username,
+                'bio' => $user->bio,
+                'profile_image' => $user->profile_image,
+                'eco_score' => $user->eco_score,
+                'role' => $user->role,
+                'created_at' => $user->created_at
+            ];
+
+            // TODO: When posts are implemented, add posts count
+            $postsCount = 0; // $user->posts()->count();
+
+            return response()->json([
+                'success' => true,
+                'user' => $profileData,
+                'posts_count' => $postsCount
+            ]);
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'User not found'
+            ], 404);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to load profile'
+            ], 500);
+        }
+    }
 }

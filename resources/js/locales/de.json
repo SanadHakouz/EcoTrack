@@ -1,7 +1,14 @@
 {
   "navbar": {
     "title": "EcoTrack",
-    "subtitle": "Persönliches Provisions-Log & Soziale Plattform"
+    "subtitle": "Persönliches Provisions-Log & Soziale Plattform",
+    "dashboard": "Dashboard",
+    "emissions": "Emissionen",
+    "community": "Community",
+    "profile": "Profil",
+    "settings": "Einstellungen",
+    "moderator": "Moderator",
+    "admin": "Admin"
   },
   "landing": {
     "welcome": "Willkommen bei EcoTrack",
@@ -48,7 +55,35 @@
     "error": "Fehler"
   },
   "profile": {
-    "title": "Profil-Einstellungen",
+    "loading": "Profil wird geladen...",
+    "notFound": "Profil nicht gefunden",
+    "userNotFound": "Benutzer nicht gefunden oder Profil ist privat.",
+    "backToDashboard": "Zurück zum Dashboard",
+    "editProfile": "Profil bearbeiten",
+    "follow": "Folgen",
+    "comingSoon": "Demnächst verfügbar",
+    "followComingSoon": "Folgen (Demnächst verfügbar)",
+    "noUsername": "Kein Benutzername",
+    "joined": "Beigetreten",
+    "noBio": "Keine Biografie verfügbar.",
+    "addBio": "Fügen Sie eine Biografie hinzu, um anderen von sich zu erzählen!",
+    "stats": {
+      "ecoScore": "Öko-Punkte",
+      "environmentalImpact": "Umwelt-Auswirkung",
+      "posts": "Beiträge",
+      "sharedStories": "Geteilte Geschichten",
+      "connections": "Verbindungen"
+    },
+    "posts": {
+      "yourPosts": "Ihre Beiträge",
+      "userPosts": "{name}s Beiträge",
+      "comingSoonTitle": "Beiträge kommen bald!",
+      "comingSoonDescription": "Wir arbeiten an der Beiträge-Funktion, mit der Benutzer ihre umweltfreundlichen Aktivitäten teilen und andere in der Community inspirieren können.",
+      "featureInDevelopment": "Funktion in Entwicklung"
+    }
+  },
+  "settings": {
+    "title": "Konto-Einstellungen",
     "subtitle": "Verwalten Sie Ihre Kontoinformationen und Einstellungen",
     "profilePhoto": {
       "title": "Profilbild",
@@ -84,8 +119,8 @@
     "actions": {
       "saveChanges": "Änderungen speichern",
       "saving": "Speichert...",
-      "updateSuccess": "Profil erfolgreich aktualisiert!",
-      "updateError": "Fehler beim Aktualisieren des Profils"
+      "updateSuccess": "Einstellungen erfolgreich aktualisiert!",
+      "updateError": "Fehler beim Aktualisieren der Einstellungen"
     },
     "accountActions": {
       "title": "Konto-Aktionen",
@@ -133,7 +168,7 @@
     "errors": {
       "uploadFailed": "Fehler beim Hochladen des Bildes",
       "removeFailed": "Fehler beim Entfernen des Bildes",
-      "updateFailed": "Fehler beim Aktualisieren des Profils"
+      "updateFailed": "Fehler beim Aktualisieren der Einstellungen"
     }
   },
   "technical": {

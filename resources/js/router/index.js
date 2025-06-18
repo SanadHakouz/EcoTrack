@@ -4,6 +4,7 @@ import { useAuthStore } from '../stores/auth'
 // Import your existing components
 import LandingPage from '../components/LandingPage.vue'
 import RegularUserDashboard from '../components/pages/user/RegularUserDashboard.vue'
+import Settings from '../components/pages/user/Settings.vue'
 import Profile from '../components/pages/user/Profile.vue'
 
 // Helper function to get role-based dashboard route
@@ -93,7 +94,16 @@ const routes = [
     }
   },
   {
-    path: '/profile',
+    path: '/settings',
+    name: 'settings',
+    component: Settings,
+    meta: {
+      requiresAuth: true,
+      title: 'Settings - EcoTrack'
+    }
+  },
+  {
+    path: '/profile/:userId',
     name: 'profile',
     component: Profile,
     meta: {

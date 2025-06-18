@@ -29,7 +29,8 @@ Route::get('/health', function () {
 
 // Vue.js SPA route - catch all routes and let Vue Router handle them
 // This should be the LAST route as it catches everything
+// EXCLUDE api routes so they can reach the API endpoints
 Route::get('/{path?}', function () {
     return view('app');
-})->where('path', '.*');
+})->where('path', '^(?!api).*$');
 
