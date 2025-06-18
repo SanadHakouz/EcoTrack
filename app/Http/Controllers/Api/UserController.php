@@ -381,8 +381,8 @@ class UserController extends Controller
                 'created_at' => $user->created_at
             ];
 
-            // TODO: When posts are implemented, add posts count
-            $postsCount = 0; // $user->posts()->count();
+            // Get actual posts count
+            $postsCount = $user->posts()->published()->count();
 
             return response()->json([
                 'success' => true,

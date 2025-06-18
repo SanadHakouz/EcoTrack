@@ -79,7 +79,76 @@
       "userPosts": "{name}'s Posts",
       "comingSoonTitle": "Posts Coming Soon!",
       "comingSoonDescription": "We're working on the posts feature where users can share their eco-friendly activities and inspire others in the community.",
-      "featureInDevelopment": "Feature in Development"
+      "featureInDevelopment": "Feature in Development",
+      "noPosts": "No posts yet",
+      "noPostsUser": "{name} hasn't posted yet",
+      "shareJourney": "Share your eco-friendly journey with the community!",
+      "checkBackLater": "Check back later to see their posts.",
+      "createFirstPost": "Create your first post",
+      "loadingPosts": "Loading posts...",
+      "loadingMorePosts": "Loading more posts...",
+      "loadMorePosts": "Load more posts"
+    }
+  },
+  "community": {
+    "title": "Community",
+    "subtitle": "Connect with eco-warriors and share your journey",
+    "whatsOnYourMind": "What's on your mind, {name}?",
+    "whatsOnYourMindDefault": "What's on your mind?",
+    "shareThoughts": "Share your eco-friendly thoughts...",
+    "createPost": {
+      "title": "Create Post",
+      "postTitle": "Post Title",
+      "postTitlePlaceholder": "Give your post a title...",
+      "content": "Content",
+      "contentPlaceholder": "Share your story, tips, or experiences...",
+      "addImage": "Add Image",
+      "publish": "Publish",
+      "publishing": "Publishing...",
+      "cancel": "Cancel",
+      "draft": "Save as Draft",
+      "success": "Post published successfully!",
+      "error": "Failed to publish post"
+    },
+    "posts": {
+      "loading": "Loading posts...",
+      "noPostsYet": "No posts yet",
+      "noPostsDescription": "Be the first to share something with the community!",
+      "writeFirst": "Write the first post",
+      "showComments": "Show comments",
+      "hideComments": "Hide comments",
+      "addComment": "Add a comment",
+      "commentPlaceholder": "Write a comment...",
+      "reply": "Reply",
+      "replyTo": "Reply to {name}",
+      "viewReplies": "View {count} replies",
+      "hideReplies": "Hide replies",
+      "postComment": "Post",
+      "posting": "Posting...",
+      "edit": "Edit",
+      "delete": "Delete",
+      "edited": "Edited",
+      "timeAgo": "{time} ago",
+      "justNow": "Just now"
+    },
+    "reactions": {
+      "like": "Like",
+      "love": "Love",
+      "ecoLove": "Eco Love",
+      "recycle": "Recycle",
+      "earthDay": "Earth Day",
+      "greenEnergy": "Green Energy",
+      "dislike": "Dislike",
+      "reactionsCount": "{count} reactions",
+      "youReacted": "You reacted",
+      "removeReaction": "Remove reaction",
+      "addReaction": "Add reaction"
+    },
+    "filters": {
+      "latest": "Latest",
+      "popular": "Popular",
+      "myPosts": "My Posts",
+      "following": "Following"
     }
   },
   "settings": {

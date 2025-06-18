@@ -79,7 +79,76 @@
       "userPosts": "{name}s Beiträge",
       "comingSoonTitle": "Beiträge kommen bald!",
       "comingSoonDescription": "Wir arbeiten an der Beiträge-Funktion, mit der Benutzer ihre umweltfreundlichen Aktivitäten teilen und andere in der Community inspirieren können.",
-      "featureInDevelopment": "Funktion in Entwicklung"
+      "featureInDevelopment": "Funktion in Entwicklung",
+      "noPosts": "Noch keine Beiträge",
+      "noPostsUser": "{name} hat noch keine Beiträge veröffentlicht",
+      "shareJourney": "Teilen Sie Ihre umweltfreundliche Reise mit der Community!",
+      "checkBackLater": "Schauen Sie später noch einmal vorbei, um ihre Beiträge zu sehen.",
+      "createFirstPost": "Ersten Beitrag erstellen",
+      "loadingPosts": "Beiträge werden geladen...",
+      "loadingMorePosts": "Weitere Beiträge werden geladen...",
+      "loadMorePosts": "Weitere Beiträge laden"
+    }
+  },
+  "community": {
+    "title": "Community",
+    "subtitle": "Verbinden Sie sich mit Öko-Kriegern und teilen Sie Ihre Reise",
+    "whatsOnYourMind": "Was beschäftigt Sie, {name}?",
+    "whatsOnYourMindDefault": "Was beschäftigt Sie?",
+    "shareThoughts": "Teilen Sie Ihre umweltfreundlichen Gedanken...",
+    "createPost": {
+      "title": "Beitrag erstellen",
+      "postTitle": "Beitragstitel",
+      "postTitlePlaceholder": "Geben Sie Ihrem Beitrag einen Titel...",
+      "content": "Inhalt",
+      "contentPlaceholder": "Teilen Sie Ihre Geschichte, Tipps oder Erfahrungen...",
+      "addImage": "Bild hinzufügen",
+      "publish": "Veröffentlichen",
+      "publishing": "Wird veröffentlicht...",
+      "cancel": "Abbrechen",
+      "draft": "Als Entwurf speichern",
+      "success": "Beitrag erfolgreich veröffentlicht!",
+      "error": "Fehler beim Veröffentlichen des Beitrags"
+    },
+    "posts": {
+      "loading": "Beiträge werden geladen...",
+      "noPostsYet": "Noch keine Beiträge",
+      "noPostsDescription": "Seien Sie der Erste, der etwas mit der Community teilt!",
+      "writeFirst": "Ersten Beitrag schreiben",
+      "showComments": "Kommentare anzeigen",
+      "hideComments": "Kommentare ausblenden",
+      "addComment": "Kommentar hinzufügen",
+      "commentPlaceholder": "Schreiben Sie einen Kommentar...",
+      "reply": "Antworten",
+      "replyTo": "Antwort an {name}",
+      "viewReplies": "{count} Antworten anzeigen",
+      "hideReplies": "Antworten ausblenden",
+      "postComment": "Senden",
+      "posting": "Wird gesendet...",
+      "edit": "Bearbeiten",
+      "delete": "Löschen",
+      "edited": "Bearbeitet",
+      "timeAgo": "vor {time}",
+      "justNow": "Gerade eben"
+    },
+    "reactions": {
+      "like": "Gefällt mir",
+      "love": "Liebe",
+      "ecoLove": "Öko-Liebe",
+      "recycle": "Recycling",
+      "earthDay": "Tag der Erde",
+      "greenEnergy": "Grüne Energie",
+      "dislike": "Gefällt mir nicht",
+      "reactionsCount": "{count} Reaktionen",
+      "youReacted": "Sie haben reagiert",
+      "removeReaction": "Reaktion entfernen",
+      "addReaction": "Reaktion hinzufügen"
+    },
+    "filters": {
+      "latest": "Neueste",
+      "popular": "Beliebt",
+      "myPosts": "Meine Beiträge",
+      "following": "Gefolgte"
     }
   },
   "settings": {

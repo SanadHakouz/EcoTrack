@@ -6,6 +6,7 @@ import LandingPage from '../components/LandingPage.vue'
 import RegularUserDashboard from '../components/pages/user/RegularUserDashboard.vue'
 import Settings from '../components/pages/user/Settings.vue'
 import Profile from '../components/pages/user/Profile.vue'
+import Community from '../views/Community.vue'
 
 // Helper function to get role-based dashboard route
 function getRoleDashboard(userRole) {
@@ -109,6 +110,15 @@ const routes = [
     meta: {
       requiresAuth: true,
       title: 'Profile - EcoTrack'
+    }
+  },
+  {
+    path: '/community',
+    name: 'community',
+    component: Community,
+    meta: {
+      requiresAuth: true,
+      title: 'Community - EcoTrack'
     }
   },
   // Future routes for your roadmap

@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -104,17 +105,30 @@ Route::middleware('auth:sanctum')->group(function () {
 
     /*
     |--------------------------------------------------------------------------
-    | Posts & Social Routes (Future Implementation)
+    | Posts & Social Routes
     |--------------------------------------------------------------------------
     */
     Route::prefix('posts')->group(function () {
-        // Route::get('/', [PostController::class, 'index']);
-        // Route::post('/', [PostController::class, 'store']);
-        // Route::get('{post}', [PostController::class, 'show']);
-        // Route::put('{post}', [PostController::class, 'update']);
-        // Route::delete('{post}', [PostController::class, 'destroy']);
-        // Route::post('{post}/react', [PostController::class, 'react']);
+        Route::get('/', [PostController::class, 'index']); // Get all posts for community feed
+        Route::post('/', [PostController::class, 'store']); // Create a new post
+        Route::get('{post}', [PostController::class, 'show']); // Get specific post with comments
+        Route::put('{post}', [PostController::class, 'update']); // Update post (owner only)
+        Route::delete('{post}', [PostController::class, 'destroy']); // Delete post (owner only)
+
+        // Reaction routes
+        Route::post('{post}/reactions', [PostController::class, 'toggleReaction']); // Toggle reaction on post
+
+        // Comment routes
+        Route::post('{post}/comments', [PostController::class, 'addComment']); // Add comment to post
+        Route::get('{post}/comments', [PostController::class, 'getComments']); // Get comments for post
     });
+
+    /*
+    |--------------------------------------------------------------------------
+    | User Posts Routes
+    |--------------------------------------------------------------------------
+    */
+    Route::get('/users/{userId}/posts', [PostController::class, 'getUserPosts']); // Get posts by specific user
 
     /*
     |--------------------------------------------------------------------------

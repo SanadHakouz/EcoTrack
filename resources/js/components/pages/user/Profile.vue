@@ -148,22 +148,73 @@
                 </h2>
               </div>
 
-              <!-- Coming Soon Placeholder -->
-              <div class="px-6 py-16 text-center">
+              <!-- Posts Loading State -->
+              <div v-if="postsLoading" class="space-y-6 p-6">
+                <div v-for="i in 3" :key="i" class="animate-pulse">
+                  <div class="flex items-center space-x-4 mb-4">
+                    <div class="w-12 h-12 bg-gray-300 rounded-full"></div>
+                    <div class="flex-1">
+                      <div class="h-4 bg-gray-300 rounded w-1/4 mb-2"></div>
+                      <div class="h-3 bg-gray-300 rounded w-1/6"></div>
+                    </div>
+                  </div>
+                  <div class="space-y-2">
+                    <div class="h-4 bg-gray-300 rounded w-3/4"></div>
+                    <div class="h-4 bg-gray-300 rounded w-1/2"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- No Posts State -->
+              <div v-else-if="!postsLoading && userPosts.length === 0" class="px-6 py-16 text-center">
                 <div class="mx-auto flex items-center justify-center h-20 w-20 rounded-full bg-gray-100 mb-6">
                   <svg class="h-10 w-10 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
                   </svg>
                 </div>
-                <h3 class="text-xl font-medium text-gray-900 mb-3">{{ $t('profile.posts.comingSoonTitle') }}</h3>
+                <h3 class="text-xl font-medium text-gray-900 mb-3">
+                  {{ isOwnProfile ? $t('profile.posts.noPosts') : $t('profile.posts.noPostsUser', { name: profileUser.name.split(' ')[0] }) }}
+                </h3>
                 <p class="text-gray-500 max-w-sm mx-auto mb-8">
-                  {{ $t('profile.posts.comingSoonDescription') }}
+                  {{ isOwnProfile
+                    ? $t('profile.posts.shareJourney')
+                    : $t('profile.posts.checkBackLater')
+                  }}
                 </p>
-                <div class="inline-flex items-center px-6 py-3 bg-gray-100 text-gray-600 rounded-lg">
-                  <svg class="w-5 h-5 mr-2 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                <router-link
+                  v-if="isOwnProfile"
+                  to="/community"
+                  class="inline-flex items-center px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors"
+                >
+                  <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                   </svg>
-                  {{ $t('profile.posts.featureInDevelopment') }}
+                  {{ $t('profile.posts.createFirstPost') }}
+                </router-link>
+              </div>
+
+              <!-- User Posts -->
+              <div v-else class="divide-y divide-gray-200">
+                <div v-for="post in userPosts" :key="post.id" class="p-6">
+                  <PostCard
+                    :post="post"
+                    @reaction="handleReaction"
+                    @comment="handleComment"
+                    @edit="handleEditPost"
+                    @delete="handleDeletePost"
+                  />
+                </div>
+
+                <!-- Load More Button -->
+                <div v-if="pagination.current_page < pagination.last_page" class="p-6 text-center border-t">
+                  <button
+                    @click="loadMorePosts"
+                    :disabled="loadingMore"
+                    class="px-6 py-3 bg-white hover:bg-gray-50 text-gray-700 border border-gray-200 rounded-lg transition-colors disabled:opacity-50"
+                  >
+                    <span v-if="loadingMore">{{ $t('profile.posts.loadingMorePosts') }}</span>
+                    <span v-else>{{ $t('profile.posts.loadMorePosts') }}</span>
+                  </button>
                 </div>
               </div>
             </div>
@@ -177,9 +228,10 @@
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { useAuthStore } from '../../../stores/auth'
+import { useAuthStore } from '@/stores/auth'
 import DashboardLayout from '../../layouts/DashboardLayout.vue'
-import axios from 'axios'
+import PostCard from '../../PostCard.vue'
+import axios from '@/utils/axios'
 
 const route = useRoute()
 const router = useRouter()
@@ -189,7 +241,16 @@ const authStore = useAuthStore()
 const profileUser = ref(null)
 const isLoading = ref(true)
 const error = ref('')
-const postsCount = ref(0) // Will be dynamic when posts feature is implemented
+const postsCount = ref(0)
+const postsLoading = ref(false)
+const userPosts = ref([])
+const pagination = ref({
+  current_page: 1,
+  last_page: 1,
+  per_page: 10,
+  total: 0
+})
+const loadingMore = ref(false)
 
 // Computed properties
 const isOwnProfile = computed(() => {
@@ -200,11 +261,11 @@ const profileImageUrl = computed(() => {
   if (profileUser.value?.profile_image) {
     return `/storage/${profileUser.value.profile_image}`
   }
-  return '/storage/profile-pictures/pp1.JPG'
+  return `https://ui-avatars.com/api/?name=${encodeURIComponent(profileUser.value?.name || 'User')}&background=059669&color=fff`
 })
 
 // Methods
-const fetchUserProfile = async () => {
+const loadProfile = async () => {
   try {
     isLoading.value = true
     error.value = ''
@@ -215,22 +276,113 @@ const fetchUserProfile = async () => {
     if (response.data.success) {
       profileUser.value = response.data.user
       postsCount.value = response.data.posts_count || 0
+
+      // Load user posts
+      await loadUserPosts()
     } else {
       error.value = response.data.message || 'Failed to load profile'
     }
   } catch (err) {
     if (err.response?.status === 404) {
-      error.value = err.response?.data?.message || 'User not found or profile is private.'
+      error.value = 'User not found or profile is private.'
     } else {
-      error.value = err.response?.data?.message || 'Failed to load profile.'
+      error.value = err.response?.data?.message || 'Failed to load profile'
     }
   } finally {
     isLoading.value = false
   }
 }
 
-const handleImageError = (event) => {
-  event.target.src = '/storage/profile-pictures/pp1.JPG'
+const loadUserPosts = async (page = 1, append = false) => {
+  try {
+    if (!append) postsLoading.value = true
+    else loadingMore.value = true
+
+    const userId = route.params.userId
+    const response = await axios.get(`/users/${userId}/posts`, {
+      params: { page }
+    })
+
+    if (response.data.success) {
+      if (append) {
+        userPosts.value.push(...response.data.posts)
+      } else {
+        userPosts.value = response.data.posts
+      }
+      pagination.value = response.data.pagination
+    }
+  } catch (err) {
+    console.error('Failed to load user posts:', err)
+  } finally {
+    postsLoading.value = false
+    loadingMore.value = false
+  }
+}
+
+const loadMorePosts = () => {
+  if (pagination.value.current_page < pagination.value.last_page) {
+    loadUserPosts(pagination.value.current_page + 1, true)
+  }
+}
+
+const handleReaction = async (postId, reactionType) => {
+  try {
+    const response = await axios.post(`/posts/${postId}/reactions`, {
+      type: reactionType
+    })
+
+    if (response.data.success) {
+      // Update the post in the list
+      const postIndex = userPosts.value.findIndex(p => p.id === postId)
+      if (postIndex !== -1) {
+        userPosts.value[postIndex].user_reaction = response.data.user_reaction
+        userPosts.value[postIndex].reaction_counts = response.data.reaction_counts
+        userPosts.value[postIndex].reactions_count = response.data.total_reactions
+      }
+    }
+  } catch (error) {
+    console.error('Failed to toggle reaction:', error)
+  }
+}
+
+const handleComment = async (postId, commentData) => {
+  try {
+    const response = await axios.post(`/posts/${postId}/comments`, commentData)
+
+    if (response.data.success) {
+      // Update the post's comment count
+      const postIndex = userPosts.value.findIndex(p => p.id === postId)
+      if (postIndex !== -1) {
+        userPosts.value[postIndex].comments_count += 1
+        // Add comment to the post's comments array if it exists
+        if (userPosts.value[postIndex].top_level_comments) {
+          userPosts.value[postIndex].top_level_comments.push(response.data.comment)
+        }
+      }
+    }
+  } catch (error) {
+    console.error('Failed to add comment:', error)
+  }
+}
+
+const handleEditPost = (post) => {
+  // TODO: Implement edit post modal
+  console.log('Edit post:', post)
+}
+
+const handleDeletePost = async (postId) => {
+  if (confirm('Are you sure you want to delete this post?')) {
+    try {
+      const response = await axios.delete(`/posts/${postId}`)
+
+      if (response.data.success) {
+        userPosts.value = userPosts.value.filter(p => p.id !== postId)
+        postsCount.value = Math.max(0, postsCount.value - 1)
+      }
+    } catch (error) {
+      console.error('Failed to delete post:', error)
+    }
+  }
 }
 
 const formatDate = (dateString) => {
@@ -239,15 +391,19 @@ const formatDate = (dateString) => {
   return date.toLocaleDateString('en-US', options)
 }
 
-// Initialize on mount
-onMounted(() => {
-  fetchUserProfile()
-})
+const handleImageError = (event) => {
+  event.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(profileUser.value?.name || 'User')}&background=059669&color=fff`
+}
 
-// Watch for route changes (if navigating between different profiles)
+// Watch for route changes
 watch(() => route.params.userId, () => {
   if (route.params.userId) {
-    fetchUserProfile()
+    loadProfile()
   }
+})
+
+// Initialize on mount
+onMounted(() => {
+  loadProfile()
 })
 </script>
