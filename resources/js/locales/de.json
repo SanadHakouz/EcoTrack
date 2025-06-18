@@ -1,0 +1,166 @@
+{
+  "navbar": {
+    "title": "EcoTrack",
+    "subtitle": "Persönliches Provisions-Log & Soziale Plattform"
+  },
+  "landing": {
+    "welcome": "Willkommen bei EcoTrack",
+    "description": "Ein revolutionäres {personalCommissionLog} und eine {socialMediaPlatform}, entwickelt um Ihnen zu helfen, Ihre Umweltauswirkungen zu verfolgen, zu teilen und zu feiern.",
+    "personalCommissionLog": "persönliches Provisions-Log",
+    "socialMediaPlatform": "soziale Medienplattform",
+    "keyFeatures": "Hauptmerkmale",
+    "features": {
+      "carbonTracking": "Persönliche CO2-Fußabdruck-Verfolgung",
+      "commissionChallenges": "Provisionsbasierte Umwelt-Herausforderungen",
+      "socialSharing": "Soziales Teilen und Community-Building",
+      "realtimeVisualization": "Echtzeit-Impact-Visualisierung"
+    },
+    "communityDescription": "Treten Sie einer Gemeinschaft umweltbewusster Menschen bei, die einen Unterschied machen, eine nachhaltige Aktion nach der anderen. Verfolgen Sie Ihren Fortschritt, verdienen Sie Provisionen für Umweltaktionen und inspirieren Sie andere durch Ihre Reise."
+  },
+  "demo": {
+    "title": "Demo: Täglicher Aktionen-Zähler",
+    "ecoAction": "+ Öko-Aktion",
+    "actionsToday": "Aktionen heute",
+    "reset": "Zurücksetzen"
+  },
+  "auth": {
+    "welcomeBack": "Willkommen zurück",
+    "createAccount": "Konto erstellen",
+    "signInSubtitle": "Melden Sie sich in Ihrem Konto an",
+    "joinSubtitle": "Treten Sie der EcoTrack-Community bei",
+    "fullName": "Vollständiger Name",
+    "fullNamePlaceholder": "Geben Sie Ihren vollständigen Namen ein",
+    "email": "E-Mail-Adresse",
+    "emailPlaceholder": "Geben Sie Ihre E-Mail ein",
+    "password": "Passwort",
+    "passwordPlaceholder": "Geben Sie Ihr Passwort ein",
+    "confirmPassword": "Passwort bestätigen",
+    "confirmPasswordPlaceholder": "Bestätigen Sie Ihr Passwort",
+    "signIn": "Anmelden",
+    "createAccountBtn": "Konto erstellen",
+    "demo": "(Demo)",
+    "alreadyHaveAccount": "Haben Sie bereits ein Konto? Anmelden",
+    "noAccount": "Haben Sie kein Konto? Registrieren",
+    "apiDemo": "API Demo",
+    "testApiConnection": "API-Verbindung testen",
+    "loading": "Lädt...",
+    "apiConnectionSuccessful": "✅ API-Verbindung erfolgreich",
+    "error": "Fehler"
+  },
+  "profile": {
+    "title": "Profil-Einstellungen",
+    "subtitle": "Verwalten Sie Ihre Kontoinformationen und Einstellungen",
+    "profilePhoto": {
+      "title": "Profilbild",
+      "description": "Laden Sie ein neues Avatar hoch, um Ihr Profil zu personalisieren",
+      "changePhoto": "Foto ändern",
+      "uploading": "Wird hochgeladen...",
+      "remove": "Entfernen",
+      "uploadSuccess": "Profilbild erfolgreich aktualisiert!",
+      "removeSuccess": "Profilbild erfolgreich entfernt!",
+      "removeConfirm": "Sind Sie sicher, dass Sie Ihr Profilbild entfernen möchten?"
+    },
+    "personalInfo": {
+      "title": "Persönliche Informationen",
+      "subtitle": "Aktualisieren Sie Ihre persönlichen Daten und Kontaktinformationen"
+    },
+    "fields": {
+      "fullName": "Vollständiger Name",
+      "fullNamePlaceholder": "Geben Sie Ihren vollständigen Namen ein",
+      "username": "Benutzername",
+      "usernamePlaceholder": "Wählen Sie einen eindeutigen Benutzernamen",
+      "usernameHint": "Nur Buchstaben, Zahlen und Unterstriche erlaubt",
+      "email": "E-Mail-Adresse",
+      "emailPlaceholder": "Geben Sie Ihre E-Mail-Adresse ein",
+      "bio": "Biografie",
+      "bioPlaceholder": "Erzählen Sie uns von sich...",
+      "bioHint": "Maximal 500 Zeichen",
+      "phone": "Telefonnummer",
+      "phonePlaceholder": "Geben Sie Ihre Telefonnummer ein",
+      "ecoScore": "Öko-Punkte",
+      "ecoScoreHint": "Ihr umweltfreundlicher Impact-Score (nur lesbar)",
+      "pointsEarned": "Punkte verdient"
+    },
+    "actions": {
+      "saveChanges": "Änderungen speichern",
+      "saving": "Speichert...",
+      "updateSuccess": "Profil erfolgreich aktualisiert!",
+      "updateError": "Fehler beim Aktualisieren des Profils"
+    },
+    "accountActions": {
+      "title": "Konto-Aktionen",
+      "subtitle": "Verwalten Sie Ihre Konto-Sicherheit und Einstellungen",
+      "resetPassword": {
+        "title": "Passwort zurücksetzen",
+        "description": "Ändern Sie Ihr Konto-Passwort",
+        "button": "Demnächst verfügbar"
+      },
+      "deactivateAccount": {
+        "title": "Konto deaktivieren",
+        "description": "Deaktivieren Sie Ihr Konto vorübergehend",
+        "button": "Demnächst verfügbar"
+      }
+    },
+    "passwordReset": {
+      "title": "Passwort zurücksetzen",
+      "resetPassword": "Passwort zurücksetzen",
+      "step1Description": "Geben Sie Ihre E-Mail-Adresse ein, um einen 4-stelligen Bestätigungscode zu erhalten.",
+      "step2Description": "Geben Sie den 4-stelligen Bestätigungscode ein, der an {email} gesendet wurde.",
+      "step3Description": "Erstellen Sie ein neues Passwort für Ihr Konto.",
+      "verificationCode": "Bestätigungscode",
+      "codePlaceholder": "0000",
+      "newPassword": "Neues Passwort",
+      "newPasswordPlaceholder": "Geben Sie Ihr neues Passwort ein",
+      "confirmPassword": "Neues Passwort bestätigen",
+      "confirmPasswordPlaceholder": "Bestätigen Sie Ihr neues Passwort",
+      "cancel": "Abbrechen",
+      "back": "Zurück",
+      "close": "Schließen",
+      "sendCode": "Code senden",
+      "sending": "Wird gesendet...",
+      "verifyCode": "Code bestätigen",
+      "verifying": "Wird überprüft...",
+      "updatePassword": "Passwort aktualisieren",
+      "updating": "Wird aktualisiert...",
+      "success": "Passwort aktualisiert!",
+      "successDescription": "Ihr Passwort wurde erfolgreich aktualisiert. Sie können sich jetzt mit Ihrem neuen Passwort anmelden.",
+      "errors": {
+        "sendFailed": "Fehler beim Senden des Bestätigungscodes",
+        "verifyFailed": "Ungültiger oder abgelaufener Code",
+        "resetFailed": "Fehler beim Aktualisieren des Passworts"
+      }
+    },
+    "errors": {
+      "uploadFailed": "Fehler beim Hochladen des Bildes",
+      "removeFailed": "Fehler beim Entfernen des Bildes",
+      "updateFailed": "Fehler beim Aktualisieren des Profils"
+    }
+  },
+  "technical": {
+    "title": "🛠️ Technische Konfiguration",
+    "frontendStack": "Frontend-Stack:",
+    "fileStructure": "Dateistruktur:",
+    "stack": {
+      "vue": "Vue.js 3 mit Composition API",
+      "pinia": "Pinia für Zustandsverwaltung",
+      "axios": "Axios für HTTP-Anfragen",
+      "tailwind": "TailwindCSS 4 für Styling",
+      "vite": "Vite für schnelle Entwicklung"
+    },
+    "files": {
+      "viteConfig": "Build-Konfiguration",
+      "appJs": "Vue-App-Einstieg",
+      "components": "Vue-Komponenten",
+      "stores": "Pinia-Stores",
+      "bootstrap": "Axios-Setup"
+    }
+  },
+  "authorNotes": {
+    "title": "📝 Autor-Notizen",
+    "note1": {
+      "title": "Notiz 1",
+      "content": "Erste Einrichtung abgeschlossen mit Vue.js, Pinia und Axios-Integration. Das Fundament ist bereit für den Aufbau der Provisions-Verfolgung und sozialen Features.",
+      "timestamp": "Gerade eben"
+    }
+  }
+}

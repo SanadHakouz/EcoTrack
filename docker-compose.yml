@@ -1,0 +1,129 @@
+services:
+  # Laravel Application
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ecotrack_app
+    volumes:
+      - .:/var/www/html
+      - ./storage:/var/www/html/storage
+    networks:
+      - ecotrack_network
+    depends_on:
+      - mysql
+      - redis
+
+  # Nginx Web Server
+  nginx:
+    image: nginx:alpine
+    container_name: ecotrack_nginx
+    ports:
+      - "80:80"
+    volumes:
+      - .:/var/www/html
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - ecotrack_network
+    depends_on:
+      - app
+
+  # Vite Development Server (for frontend)
+  vite:
+    image: node:20-alpine
+    container_name: ecotrack_vite
+    working_dir: /var/www/html
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/var/www/html
+      - /var/www/html/node_modules
+    command: sh -c "npm install && npm run dev -- --host 0.0.0.0"
+    networks:
+      - ecotrack_network
+    profiles:
+      - frontend
+
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: ecotrack_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: ecotrack
+      MYSQL_USER: ecotrack_user
+      MYSQL_PASSWORD: ecotrack_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - ecotrack_network
+    command: --default-authentication-plugin=mysql_native_password
+
+  # Redis Cache & Queue
+  redis:
+    image: redis:7-alpine
+    container_name: ecotrack_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - ecotrack_network
+
+  # Mailpit (Email testing)
+  mailpit:
+    image: axllent/mailpit
+    container_name: ecotrack_mailpit
+    ports:
+      - "8025:8025"
+      - "1025:1025"
+    networks:
+      - ecotrack_network
+
+  # Queue worker - FIXED
+  queue:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ecotrack_queue
+    restart: unless-stopped
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - mysql
+      - redis
+    networks:
+      - ecotrack_network
+    # Override the default CMD from Dockerfile
+    command: php artisan queue:work redis --sleep=3 --tries=3 --max-time=3600
+    environment:
+      - APP_ENV=local
+      - APP_DEBUG=true
+      - DB_HOST=mysql
+      - REDIS_HOST=redis
+
+  # phpMyAdmin (Database management)
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    platform: linux/amd64
+    container_name: ecotrack_phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: ecotrack_user
+      PMA_PASSWORD: ecotrack_password
+    ports:
+      - "8080:80"
+    networks:
+      - ecotrack_network
+    depends_on:
+      - mysql
+
+volumes:
+  mysql_data:
+  redis_data:
+
+networks:
+  ecotrack_network:
+    driver: bridge

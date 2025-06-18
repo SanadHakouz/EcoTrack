@@ -1,0 +1,166 @@
+{
+  "navbar": {
+    "title": "EcoTrack",
+    "subtitle": "Personal Commission Log & Social Platform"
+  },
+  "landing": {
+    "welcome": "Welcome to EcoTrack",
+    "description": "A revolutionary {personalCommissionLog} and {socialMediaPlatform} designed to help you track, share, and celebrate your environmental impact.",
+    "personalCommissionLog": "personal commission log",
+    "socialMediaPlatform": "social media platform",
+    "keyFeatures": "Key Features",
+    "features": {
+      "carbonTracking": "Personal carbon footprint tracking",
+      "commissionChallenges": "Commission-based environmental challenges",
+      "socialSharing": "Social sharing and community building",
+      "realtimeVisualization": "Real-time impact visualization"
+    },
+    "communityDescription": "Join a community of eco-conscious individuals who are making a difference, one sustainable action at a time. Track your progress, earn commissions for environmental actions, and inspire others through your journey."
+  },
+  "demo": {
+    "title": "Demo: Daily Actions Counter",
+    "ecoAction": "+ Eco Action",
+    "actionsToday": "actions today",
+    "reset": "Reset"
+  },
+  "auth": {
+    "welcomeBack": "Welcome Back",
+    "createAccount": "Create Account",
+    "signInSubtitle": "Sign in to your account",
+    "joinSubtitle": "Join the EcoTrack community",
+    "fullName": "Full Name",
+    "fullNamePlaceholder": "Enter your full name",
+    "email": "Email Address",
+    "emailPlaceholder": "Enter your email",
+    "password": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "confirmPassword": "Confirm Password",
+    "confirmPasswordPlaceholder": "Confirm your password",
+    "signIn": "Sign In",
+    "createAccountBtn": "Create Account",
+    "demo": "(Demo)",
+    "alreadyHaveAccount": "Already have an account? Sign In",
+    "noAccount": "Don't have an account? Sign Up",
+    "apiDemo": "API Demo",
+    "testApiConnection": "Test API Connection",
+    "loading": "Loading...",
+    "apiConnectionSuccessful": "✅ API Connection Successful",
+    "error": "Error"
+  },
+  "profile": {
+    "title": "Profile Settings",
+    "subtitle": "Manage your account information and preferences",
+    "profilePhoto": {
+      "title": "Profile Photo",
+      "description": "Upload a new avatar to personalize your profile",
+      "changePhoto": "Change Photo",
+      "uploading": "Uploading...",
+      "remove": "Remove",
+      "uploadSuccess": "Profile photo updated successfully!",
+      "removeSuccess": "Profile photo removed successfully!",
+      "removeConfirm": "Are you sure you want to remove your profile photo?"
+    },
+    "personalInfo": {
+      "title": "Personal Information",
+      "subtitle": "Update your personal details and contact information"
+    },
+    "fields": {
+      "fullName": "Full Name",
+      "fullNamePlaceholder": "Enter your full name",
+      "username": "Username",
+      "usernamePlaceholder": "Choose a unique username",
+      "usernameHint": "Only letters, numbers, and underscores allowed",
+      "email": "Email Address",
+      "emailPlaceholder": "Enter your email address",
+      "bio": "Bio",
+      "bioPlaceholder": "Tell us about yourself...",
+      "bioHint": "Maximum 500 characters",
+      "phone": "Phone Number",
+      "phonePlaceholder": "Enter your phone number",
+      "ecoScore": "Eco Score",
+      "ecoScoreHint": "Your eco-friendly impact score (read-only)",
+      "pointsEarned": "Points earned"
+    },
+    "actions": {
+      "saveChanges": "Save Changes",
+      "saving": "Saving...",
+      "updateSuccess": "Profile updated successfully!",
+      "updateError": "Error updating profile"
+    },
+    "accountActions": {
+      "title": "Account Actions",
+      "subtitle": "Manage your account security and preferences",
+      "resetPassword": {
+        "title": "Reset Password",
+        "description": "Change your account password",
+        "button": "Coming Soon"
+      },
+      "deactivateAccount": {
+        "title": "Deactivate Account",
+        "description": "Temporarily disable your account",
+        "button": "Coming Soon"
+      }
+    },
+    "passwordReset": {
+      "title": "Reset Password",
+      "resetPassword": "Reset Password",
+      "step1Description": "Enter your email address to receive a 4-digit verification code.",
+      "step2Description": "Enter the 4-digit verification code sent to {email}.",
+      "step3Description": "Create a new password for your account.",
+      "verificationCode": "Verification Code",
+      "codePlaceholder": "0000",
+      "newPassword": "New Password",
+      "newPasswordPlaceholder": "Enter your new password",
+      "confirmPassword": "Confirm New Password",
+      "confirmPasswordPlaceholder": "Confirm your new password",
+      "cancel": "Cancel",
+      "back": "Back",
+      "close": "Close",
+      "sendCode": "Send Code",
+      "sending": "Sending...",
+      "verifyCode": "Verify Code",
+      "verifying": "Verifying...",
+      "updatePassword": "Update Password",
+      "updating": "Updating...",
+      "success": "Password Updated!",
+      "successDescription": "Your password has been successfully updated. You can now sign in with your new password.",
+      "errors": {
+        "sendFailed": "Failed to send verification code",
+        "verifyFailed": "Invalid or expired code",
+        "resetFailed": "Failed to update password"
+      }
+    },
+    "errors": {
+      "uploadFailed": "Failed to upload image",
+      "removeFailed": "Failed to remove image",
+      "updateFailed": "Failed to update profile"
+    }
+  },
+  "technical": {
+    "title": "🛠️ Technical Configuration",
+    "frontendStack": "Frontend Stack:",
+    "fileStructure": "File Structure:",
+    "stack": {
+      "vue": "Vue.js 3 with Composition API",
+      "pinia": "Pinia for state management",
+      "axios": "Axios for HTTP requests",
+      "tailwind": "TailwindCSS 4 for styling",
+      "vite": "Vite for fast development"
+    },
+    "files": {
+      "viteConfig": "Build configuration",
+      "appJs": "Vue app entry",
+      "components": "Vue components",
+      "stores": "Pinia stores",
+      "bootstrap": "Axios setup"
+    }
+  },
+  "authorNotes": {
+    "title": "📝 Author Notes",
+    "note1": {
+      "title": "Note 1",
+      "content": "Initial setup complete with Vue.js, Pinia, and Axios integration. The foundation is ready for building the commission tracking and social features.",
+      "timestamp": "Just now"
+    }
+  }
+}

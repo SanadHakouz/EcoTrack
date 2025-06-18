@@ -1,0 +1,420 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# EcoTrack Project Context
+
+## Project Overview
+EcoTrack is a full-stack carbon footprint tracking application designed as a portfolio project to showcase modern web development skills for remote job opportunities and positions in Germany. The application features real-time social interactions, comprehensive emission tracking, and multi-role user management.
+
+**Target Complexity**: 8.5/10
+**Timeline**: 12-14 weeks
+**Theme**: Environmental sustainability (appeals to German market)
+**Languages**: English and German support
+
+## Architecture
+- **Type**: API-first SPA (Single Page Application)
+- **Pattern**: Laravel API backend + Vue.js frontend
+- **Authentication**: Stateless API tokens via Laravel Sanctum
+- **Real-time**: Laravel Reverb WebSockets
+- **Deployment**: Docker containerized
+
+## Technology Stack
+
+### Backend (Laravel 12)
+- **Framework**: Laravel 12 (PHP 8.3+)
+- **Database**: MySQL 8.0
+- **Authentication**: Laravel Sanctum (API tokens)
+- **Caching**: Redis
+- **Queue**: Redis-backed Laravel Queue
+- **WebSockets**: Laravel Reverb
+- **Image Processing**: Intervention Image
+- **Testing**: PHPUnit, Pest
+
+### Frontend (Vue 3)
+- **Framework**: Vue 3 with Composition API
+- **Build Tool**: Vite
+- **State Management**: Pinia
+- **HTTP Client**: Axios
+- **Routing**: Vue Router 4
+- **Styling**: TailwindCSS 4
+- **Charts**: Chart.js or ApexCharts
+- **Testing**: Vitest, Vue Test Utils
+
+### Infrastructure
+- **Containerization**: Docker & Docker Compose
+- **Web Server**: Nginx (reverse proxy)
+- **Process Manager**: Supervisor (for queues)
+- **Development**: Laravel Sail
+
+## Database Schema
+
+### Core Tables
+- `users` (id, username, email, role, status, profile_image, bio, eco_score, language)
+- `emissions` (id, user_id, activity_type, activity_description, carbon_amount, activity_date, metadata)
+- `posts` (id, user_id, title, content, image_path, tags, status, views_count)
+- `reactions` (id, user_id, reactable_id, reactable_type, reaction_type) - polymorphic
+- `follows` (id, follower_id, following_id)
+- `notifications` (id, user_id, type, title, message, data, read_at)
+- `announcements` (id, user_id, title, content, status, published_at)
+- `reports` (id, reporter_id, reported_user_id, reported_post_id, reason, status, reviewed_by)
+
+### Key Relationships
+- User hasMany Emissions, Posts, Notifications
+- User belongsToMany User (followers/following)
+- Post morphMany Reactions
+- Polymorphic reactions (posts can be reacted to)
+
+## User Roles & Permissions
+
+### User (Default)
+- View posts, create posts, react to posts
+- Log emissions, view own analytics
+- Follow/unfollow users, manage own profile
+- Report users/posts
+
+### Moderator
+- All user permissions plus:
+- Moderate posts (remove inappropriate content)
+- Ban users, review reports
+- Create announcements (pending admin approval)
+
+### Admin
+- All permissions (full system control)
+- Manage users (delete, change roles)
+- Approve/reject announcements
+- Access system analytics
+
+## API Structure
+
+### Authentication Routes
+```
+POST /api/auth/register
+POST /api/auth/login
+POST /api/auth/logout
+GET  /api/auth/me
+```
+
+### Core Resource Routes
+```
+/api/users/* - User management
+/api/emissions/* - Carbon footprint tracking
+/api/posts/* - Blog posts and social content
+/api/notifications/* - Real-time notifications
+/api/announcements/* - System announcements
+```
+
+### Admin Routes
+```
+/api/admin/users/* - User management
+/api/admin/reports/* - Content moderation
+/api/admin/analytics/* - System metrics
+```
+
+## Carbon Footprint Calculation
+
+### Activity Types
+- **Transport**: Car (petrol/diesel/electric), bus, train, bicycle, walking, flights
+- **Energy**: Electricity (Germany/EU), natural gas, heating oil, renewable
+- **Food**: Beef, lamb, pork, chicken, fish, dairy, vegetables, fruits, grains
+- **Waste**: General waste, recycling, composting
+
+### Emission Factors (kg CO2e)
+- Car petrol: 2.31 per liter
+- Electricity (Germany): 0.366 per kWh
+- Beef: 27.0 per kg
+- (See EmissionCalculatorService for complete factors)
+
+### Eco Score Calculation
+- Based on user's emissions vs community average
+- Scale: 0-100 (higher = more eco-friendly)
+- Recalculated monthly via background jobs
+
+## Social Features
+
+### Posts
+- Title, content, optional image, tags
+- Reaction system: 🌱 (plant), ♻️ (recycle), 🔥 (fire), 💩 (poop)
+- Feed filters: latest, popular, following
+- Content moderation and reporting
+
+### Following System
+- Simple follow/unfollow (no approval needed)
+- Follower/following counts and lists
+- Following-based feed filtering
+
+### Notifications
+- Real-time via Laravel Reverb WebSockets
+- Types: follow, reaction, report_action, announcement, achievement
+- In-app and email notifications
+
+## File Structure
+
+### Laravel Backend
+```
+app/
+├── Http/Controllers/Api/
+├── Models/
+├── Services/
+├── Jobs/
+├── Events/
+├── Listeners/
+├── Policies/
+├── Requests/
+└── Resources/
+```
+
+### Vue Frontend
+```
+src/
+├── components/
+├── composables/
+├── stores/
+├── router/
+├── utils/
+├── assets/
+└── locales/
+```
+
+## Coding Standards
+
+### PHP/Laravel
+- Follow PSR-12 coding standards
+- Use type hints and return types
+- Service layer for business logic
+- Form Request classes for validation
+- API Resources for response formatting
+- Event-driven architecture for notifications
+
+### Vue/JavaScript
+- Composition API preferred over Options API
+- Use Pinia stores for state management
+- Composables for reusable logic
+- TypeScript-style prop definitions (with runtime validation)
+- Single File Components (.vue)
+- PascalCase for component names
+
+### Database
+- Snake_case for table and column names
+- Foreign key constraints
+- Proper indexing on frequently queried columns
+- Soft deletes for user content
+- JSON columns for flexible metadata
+
+### API Design
+- RESTful conventions
+- Consistent response format: `{success, message, data}`
+- Proper HTTP status codes
+- Pagination for large datasets
+- Rate limiting and throttling
+
+## Real-time Features
+
+### WebSocket Channels
+- `notifications.{userId}` - User-specific notifications
+- `posts.feed` - Global post updates
+- Private channels requiring authentication
+
+### Broadcasting Events
+- UserFollowed, PostCreated, PostReacted
+- NotificationSent, ReportCreated
+- Auto-broadcast to relevant channels
+
+## Performance Considerations
+
+### Caching Strategy
+- Redis for session storage, API responses, query results
+- Cache invalidation on model events
+- Cached aggregations for analytics
+
+### Database Optimization
+- Eager loading for N+1 prevention
+- Proper indexing strategy
+- Query optimization monitoring
+- Pagination for large datasets
+
+### Frontend Optimization
+- Route-based code splitting
+- Component lazy loading
+- Image optimization and compression
+- Efficient state management updates
+
+## Security Measures
+
+### Authentication & Authorization
+- Sanctum API tokens with expiration
+- Role-based access control (RBAC)
+- Input validation and sanitization
+- Rate limiting on sensitive endpoints
+
+### Data Protection
+- CORS configuration
+- CSRF protection
+- SQL injection prevention (Eloquent ORM)
+- XSS protection with output escaping
+- File upload validation and processing
+
+## Testing Strategy
+
+### Backend Testing
+- Feature tests for API endpoints
+- Unit tests for services and calculations
+- Database testing with transactions
+- Mock external dependencies
+
+### Frontend Testing
+- Component unit tests with Vue Test Utils
+- Integration tests for user flows
+- E2E testing for critical paths
+- Real-time feature testing
+
+## Development Workflow
+
+### Git Strategy
+- Main branch for stable code
+- Feature branches for development
+- Descriptive commit messages
+- Regular commits during development
+
+### Environment Management
+- Docker for consistent development environment
+- Environment-specific configuration
+- Secure secret management
+- Database seeding for development
+
+## Internationalization
+
+### Language Support
+- English (en) and German (de)
+- Vue I18n for frontend translations
+- Laravel localization for backend
+- Database content translation strategy
+
+### Regional Considerations
+- German carbon footprint factors
+- Cultural sensitivity in content
+- GDPR compliance features
+- European date/time formats
+
+## Business Logic
+
+### Emission Tracking
+- Daily emission logging with activity details
+- Automatic carbon footprint calculation
+- Monthly eco-score updates
+- Trend analysis and insights
+
+### Social Engagement
+- Community-driven content sharing
+- Gamification through eco-scores
+- Achievement system for milestones
+- Environmental awareness promotion
+
+### Content Moderation
+- User reporting system
+- Moderator review workflow
+- Automated content filtering
+- Appeal process for actions taken
+
+## Common Patterns
+
+### Error Handling
+```php
+// Backend
+try {
+    // operation
+    return response()->json(['success' => true, 'data' => $result]);
+} catch (\Exception $e) {
+    return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+}
+```
+
+```javascript
+// Frontend
+try {
+    const response = await api.post('/endpoint', data)
+    showToast('Success!', 'success')
+    return { success: true, data: response.data }
+} catch (error) {
+    const message = error.response?.data?.message || 'Operation failed'
+    showToast(message, 'error')
+    return { success: false, error: message }
+}
+```
+
+### API Resource Pattern
+```php
+class PostResource extends JsonResource
+{
+    public function toArray($request): array
+    {
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'content' => $this->content,
+            'user' => new UserResource($this->whenLoaded('user')),
+            'reactions_count' => $this->reactions_count,
+            'created_at' => $this->created_at,
+        ];
+    }
+}
+```
+
+### Vue Composable Pattern
+```javascript
+export function useEmissions() {
+    const emissions = ref([])
+    const isLoading = ref(false)
+
+    const fetchEmissions = async () => {
+        isLoading.value = true
+        try {
+            const response = await api.get('/emissions')
+            emissions.value = response.data.emissions
+        } finally {
+            isLoading.value = false
+        }
+    }
+
+    return { emissions, isLoading, fetchEmissions }
+}
+```
+
+## Key Features Implementation Priority
+
+### Phase 1 (Critical)
+- User authentication and management
+- Basic emission logging
+- Core API structure
+
+### Phase 2 (High)
+- Social features (posts, reactions)
+- Real-time notifications
+- Image upload and processing
+
+### Phase 3 (Medium)
+- Admin panel and moderation
+- Advanced analytics
+- Performance optimization
+
+### Phase 4 (Nice-to-have)
+- Advanced gamification
+- Data export features
+- Mobile responsiveness enhancements
+
+## Deployment Considerations
+
+### Production Requirements
+- SSL certificate for HTTPS
+- Database connection pooling
+- Redis configuration for production
+- WebSocket server configuration (Reverb)
+- File storage optimization (local/S3)
+
+### Monitoring
+- Application performance monitoring
+- Error tracking and logging
+- Database query performance
+- WebSocket connection health
+- User engagement metrics
