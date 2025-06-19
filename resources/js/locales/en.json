@@ -10,6 +10,10 @@
     "moderator": "Moderator",
     "admin": "Admin"
   },
+  "notifications": {
+    "followers": "Followers",
+    "reactionsComments": "Reactions & Comments"
+  },
   "landing": {
     "welcome": "Welcome to EcoTrack",
     "description": "A revolutionary {personalCommissionLog} and {socialMediaPlatform} designed to help you track, share, and celebrate your environmental impact.",

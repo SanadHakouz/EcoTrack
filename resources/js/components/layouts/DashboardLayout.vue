@@ -292,6 +292,46 @@
       </div>
     </header>
 
+    <!-- Inactive Navbar with Notification Icons -->
+    <div class="bg-white border-b border-gray-200 shadow-sm">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-center h-12">
+          <div class="flex items-center space-x-8">
+            <!-- Followers Icon -->
+            <div class="flex items-center text-gray-400 cursor-not-allowed">
+              <div class="relative">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                </svg>
+                <!-- Notification Badge -->
+                <span class="absolute -top-2 -right-2 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-red-500 rounded-full">
+                  0
+                </span>
+              </div>
+              <span class="ml-2 text-sm font-medium">{{ $t('notifications.followers') }}</span>
+            </div>
+
+            <!-- Separator -->
+            <div class="h-6 w-px bg-gray-200"></div>
+
+            <!-- Reactions & Comments Icon -->
+            <div class="flex items-center text-gray-400 cursor-not-allowed">
+              <div class="relative">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                </svg>
+                <!-- Notification Badge -->
+                <span class="absolute -top-2 -right-2 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-red-500 rounded-full">
+                  0
+                </span>
+              </div>
+              <span class="ml-2 text-sm font-medium">{{ $t('notifications.reactionsComments') }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Main Content -->
     <main class="flex-1">
       <slot />
